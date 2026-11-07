@@ -292,6 +292,10 @@ function runStatement(statement, params, cb, scope) {
 		: cb;
 	try {
 		return statement(params, done, scope);
+	} catch (err) {
+		// A synchronous throw never reaches the callback, so the run ends here (#2875)
+		finish();
+		throw err;
 	} finally {
 		if (!cb) {
 			finish();
