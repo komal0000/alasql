@@ -44,6 +44,7 @@ yy.Select.prototype.compileJoins = function (query) {
 			};
 
 			query.sources.push(source);
+			query.aliases[source.alias] = {type: 'subquery'};
 
 			return;
 		}
